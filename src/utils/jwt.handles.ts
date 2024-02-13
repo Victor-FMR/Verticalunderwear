@@ -1,6 +1,6 @@
 import Jwt from "jsonwebtoken";
-import { REFRESH_TOKEN, SECRET_TOKEN } from "../config";
-import { logger } from "../logs/pino.logger"
+import { REFRESH_TOKEN, SECRET_TOKEN } from "../config.js";
+import { logger } from "../logs/pino.logger.js"
 export const generateAccessToken = (payload: any) => {
   try {
     const token = Jwt.sign(payload, SECRET_TOKEN, { expiresIn: "1D" });

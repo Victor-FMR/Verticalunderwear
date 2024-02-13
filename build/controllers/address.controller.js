@@ -1,4 +1,4 @@
-import { createdAddress, deleteAddress, getAddress, putAddress } from "../services/address.service";
+import { createdAddress, deleteAddress, getAddress, putAddress } from "../services/address.service.js";
 export const postAddressCtrl = async (req, res) => {
     try {
         const result = await createdAddress(req, res);

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 
-import { compare, hashpassword } from "../utils/bcrypt.handles";
-import {  generateAccessToken,   generateRefreshToken, verifyAccessToken, verifyRefreshToken} from "../utils/jwt.handles";
-import { logger } from "../logs/pino.logger";
-import { REFRESH_TOKEN, SECRET_TOKEN } from "../config";
+import { compare, hashpassword } from "../utils/bcrypt.handles.js";
+import {  generateAccessToken,   generateRefreshToken, verifyAccessToken, verifyRefreshToken} from "../utils/jwt.handles.js";
+import { logger } from "../logs/pino.logger.js";
+import { REFRESH_TOKEN, SECRET_TOKEN } from "../config.js";
 
 const Prisma = new PrismaClient();
 

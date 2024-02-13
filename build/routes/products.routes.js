@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getProductsByNameCtrl, productsCtrl, createdProductsCtrl, putProductsCtrl } from "../controllers/products.controller";
-import { checkAuthorization } from "../middlewares/request.middleware";
+import { getProductsByNameCtrl, productsCtrl, createdProductsCtrl, putProductsCtrl } from "../controllers/products.controller.js";
+import { checkAuthorization } from "../middlewares/request.middleware.js";
 const server = Router();
 server.get('/api/products', checkAuthorization, productsCtrl);
 server.get('/api/products/:name', checkAuthorization, getProductsByNameCtrl);

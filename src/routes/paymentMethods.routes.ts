@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { checkAuthorization } from "../middlewares/request.middleware";
-import { deleteUserPaymentMethodsCtrl, getUserPaymentMethodsCtrl, postUserPaymentMethodsCtrl, putUserPaymentMethodsCtrl } from "../controllers/paymentMethods.controller";
+import { checkAuthorization } from "../middlewares/request.middleware.js";
+import { deleteUserPaymentMethodsCtrl, getUserPaymentMethodsCtrl, postUserPaymentMethodsCtrl, putUserPaymentMethodsCtrl } from "../controllers/paymentMethods.controller.js";
 
 
 const server = Router()

@@ -1,4 +1,4 @@
-import { addShoppingcart, updateShoppingcart, dismShoppingcart } from "../services/shoppingCart.service";
+import { addShoppingcart, updateShoppingcart, dismShoppingcart } from "../services/shoppingCart.service.js";
 export const addCartCtrl = async (req, res) => {
     try {
         await addShoppingcart(req, res, req.params.id);

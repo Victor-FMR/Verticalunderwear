@@ -2,7 +2,7 @@
 // import { Request, Response, Router } from "express";
 // import upload from "../multer-config";
 // import path from "path";
-// import { uploadFile,readFile, getFiles } from "../aws/s3.aws";
+// import { uploadFile,readFile, getFiles } from "../aws/s3.aws.js";
 // const server = Router()
 // server.get('/',(req,res)=>{
 //     res.sendFile(path.join(__dirname, '../prueba.html'))

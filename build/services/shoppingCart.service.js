@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { createpaypalOrder } from "./paypalPayment.service";
+import { createpaypalOrder } from "./paypalPayment.service.js";
 const Prisma = new PrismaClient();
 //NOTE - agregar producto al carrito de compras
 export const addShoppingcart = async (req, res, id) => {

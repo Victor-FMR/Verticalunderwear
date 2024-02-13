@@ -1,6 +1,6 @@
-import { login, registerNewUser } from "../services/auth.service";
-import { generateAccessToken, verifyRefreshToken } from "../utils/jwt.handles";
-import { REFRESH_TOKEN } from "../config";
+import { login, registerNewUser } from "../services/auth.service.js";
+import { generateAccessToken, verifyRefreshToken } from "../utils/jwt.handles.js";
+import { REFRESH_TOKEN } from "../config.js";
 export const registerCtrl = async (req, res) => {
     try {
         await registerNewUser(req, res);

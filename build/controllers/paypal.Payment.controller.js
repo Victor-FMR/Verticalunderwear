@@ -1,4 +1,4 @@
-import { capturePaymentOrder, createpaypalOrder, getPaypalToken } from "../services/paypalPayment.service";
+import { capturePaymentOrder, createpaypalOrder, getPaypalToken } from "../services/paypalPayment.service.js";
 export const postPaypalTokenCtrl = async (res) => {
     try {
         const result = await getPaypalToken(res);

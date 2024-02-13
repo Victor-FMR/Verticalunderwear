@@ -2,7 +2,7 @@
   "compilerOptions": {
     "outDir": "./build",
     "target": "ES2022", // Mejor equilibrio para modernidad y compatibilidad
-    "module": "ES6", // Alineado con Node.js y compatible con la mayoría de las herramientas
+    "module": "ES2022", // Alineado con Node.js y compatible con la mayoría de las herramientas
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,

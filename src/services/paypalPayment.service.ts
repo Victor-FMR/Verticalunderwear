@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import axios from "axios";
-import { PAYPAL_API, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "../config";
+import { PAYPAL_API, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "../config.js";
 import { PrismaClient } from "@prisma/client";
-import { User } from "../interfaces/user.interface";
+import { User } from "../interfaces/user.interface.js";
 export const getPaypalToken = async ( res: Response) => {
   try {
     const params = new URLSearchParams();

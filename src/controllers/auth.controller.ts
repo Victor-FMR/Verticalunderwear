@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { login, registerNewUser } from "../services/auth.service";
+import { login, registerNewUser } from "../services/auth.service.js";
 
-import { generateAccessToken, verifyRefreshToken } from "../utils/jwt.handles";
-import { REFRESH_TOKEN } from "../config";
-import { User } from "../interfaces/user.interface";
+import { generateAccessToken, verifyRefreshToken } from "../utils/jwt.handles.js";
+import { REFRESH_TOKEN } from "../config.js";
+import { User } from "../interfaces/user.interface.js";
 
 export const registerCtrl = async (req: Request, res: Response) => {
   try {

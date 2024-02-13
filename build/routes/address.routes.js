@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { deleteAddressCtrl, getAddressCtrl, postAddressCtrl, putAddressCtrl } from "../controllers/address.controller";
-import { checkAuthorization } from "../middlewares/request.middleware";
+import { deleteAddressCtrl, getAddressCtrl, postAddressCtrl, putAddressCtrl } from "../controllers/address.controller.js";
+import { checkAuthorization } from "../middlewares/request.middleware.js";
 //import { oAuth2 } from "../utils/oauth2.handles";
 const server = Router();
 server.get('/api/address', checkAuthorization, getAddressCtrl);

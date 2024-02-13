@@ -1,4 +1,4 @@
-// import { Strategy, VerifyCallback} from "passport-google-oauth20";
+// import { Strategy, VerifyCallback} from "passport-google-oauth20.js";
 
 // import passport from "passport";
 // import {

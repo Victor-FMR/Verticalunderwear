@@ -1,4 +1,4 @@
-import { registerSchema } from "../schemas/auth.schemas";
+import { registerSchema } from "../schemas/auth.schemas.js";
 //import { ZodError } from "zod";
 export const registerValidator = (req, res, next) => {
     try {

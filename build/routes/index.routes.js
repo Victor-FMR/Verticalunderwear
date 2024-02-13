@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { accessoriesCtrl, brandCtrl, homeCtrl, newCtrl, rewardsCtrl, saleCtrl, womenCtrl, youthCtrl } from "../controllers/index.controller";
+import { accessoriesCtrl, brandCtrl, homeCtrl, newCtrl, rewardsCtrl, saleCtrl, womenCtrl, youthCtrl } from "../controllers/index.controller.js";
 //import { oAuth2 } from "../utils/oauth2.handles";
 const server = Router();
 server.get('/', homeCtrl);

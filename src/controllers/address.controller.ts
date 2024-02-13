@@ -1,6 +1,6 @@
 
 import { Request, Response } from "express";
-import { createdAddress, deleteAddress, getAddress, putAddress } from "../services/address.service";
+import { createdAddress, deleteAddress, getAddress, putAddress } from "../services/address.service.js";
 
 export const postAddressCtrl = async (req: Request, res: Response) => {
   try {

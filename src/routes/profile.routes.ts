@@ -1,5 +1,5 @@
 // import { Router } from "express";
-// import { checkAuthorization } from "../middlewares/request.middleware";
+// import { checkAuthorization } from "../middlewares/request.middleware.js";
 
 // const server = Router()
 

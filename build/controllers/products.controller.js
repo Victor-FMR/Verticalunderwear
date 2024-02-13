@@ -1,4 +1,4 @@
-import { createdProducts, getProducts, getProductsByName, updateProducts, } from "../services/products.service";
+import { createdProducts, getProducts, getProductsByName, updateProducts, } from "../services/products.service.js";
 export const productsCtrl = async (res) => {
     const result = await getProducts();
     res.json(result);

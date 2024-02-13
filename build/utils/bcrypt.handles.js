@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 //import { Request } from "express";
-import { logger } from "../logs/pino.logger";
+import { logger } from "../logs/pino.logger.js";
 export const hashpassword = async (pass) => {
     try {
         const hash = await bcrypt.hash(pass, 10);

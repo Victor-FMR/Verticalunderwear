@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import {  verifyAccessToken} from "../utils/jwt.handles";
+import {  verifyAccessToken} from "../utils/jwt.handles.js";
 
-import {  SECRET_TOKEN} from "../config";
+import {  SECRET_TOKEN} from "../config.js";
 //import { JwtPayload } from "../interfaces/user.interface";
 
 

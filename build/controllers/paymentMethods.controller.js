@@ -1,4 +1,4 @@
-import { createdPaymentMethods, getPaymentMethods, putPaymentMethods, } from "../services/paymentMethods.service";
+import { createdPaymentMethods, getPaymentMethods, putPaymentMethods, } from "../services/paymentMethods.service.js";
 export const postUserPaymentMethodsCtrl = async (req, res) => {
     try {
         const result = await createdPaymentMethods(req, res);

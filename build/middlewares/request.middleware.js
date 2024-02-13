@@ -1,5 +1,5 @@
-import { verifyAccessToken } from "../utils/jwt.handles";
-import { SECRET_TOKEN } from "../config";
+import { verifyAccessToken } from "../utils/jwt.handles.js";
+import { SECRET_TOKEN } from "../config.js";
 //import { JwtPayload } from "../interfaces/user.interface";
 export const checkAuthorization = (req, res, next) => {
     const token = req.cookies.accessToken;

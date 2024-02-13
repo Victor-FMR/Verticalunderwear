@@ -3,7 +3,7 @@ import {
   createdPaymentMethods,
   getPaymentMethods,
   putPaymentMethods,
-} from "../services/paymentMethods.service";
+} from "../services/paymentMethods.service.js";
 
 export const postUserPaymentMethodsCtrl = async (
   req: Request,

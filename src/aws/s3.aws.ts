@@ -2,7 +2,7 @@
 import { Request } from "express";
 //import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand, GetObjectCommand,ListObjectsCommand,} from "@aws-sdk/client-s3";
-import { AWS_ID_PUBLIC_KEY, AWS_ID_SECRET_KEY, AWS_NAME_BUCKET, AWS_PUBLIC_REGION } from "../config";
+import { AWS_ID_PUBLIC_KEY, AWS_ID_SECRET_KEY, AWS_NAME_BUCKET, AWS_PUBLIC_REGION } from "../config.js";
 
 const client = new S3Client({
     region: AWS_PUBLIC_REGION,

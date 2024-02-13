@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-import {  User } from "../interfaces/user.interface";
-import { createpaypalOrder } from "./paypalPayment.service";
+import {  User } from "../interfaces/user.interface.js";
+import { createpaypalOrder } from "./paypalPayment.service.js";
 const Prisma = new PrismaClient();
 
 

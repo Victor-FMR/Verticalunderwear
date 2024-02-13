@@ -4,7 +4,7 @@ import {
   getProducts,
   getProductsByName,
   updateProducts,
-} from "../services/products.service";
+} from "../services/products.service.js";
 
 export const productsCtrl = async ( res: Response) => {
   const result = await getProducts();

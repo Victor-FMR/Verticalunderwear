@@ -1,5 +1,5 @@
 import axios from "axios";
-import { PAYPAL_API, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "../config";
+import { PAYPAL_API, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "../config.js";
 import { PrismaClient } from "@prisma/client";
 export const getPaypalToken = async (res) => {
     try {
@@ -31,7 +31,7 @@ export const createpaypalOrder = async (req, res) => {
             intent: "CAPTURE",
             purchase_units: [
                 {
-                    reference_id: PAYPAL_CLIENT_ID, // The reference ID for the transaction in your system.
+                    reference_id: PAYPAL_CLIENT_ID,
                     amount: {
                         currency_code: "USD",
                         value: shop.totalPrice // The amount of the transaction in the currency specified above.

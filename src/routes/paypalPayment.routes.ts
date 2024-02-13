@@ -1,6 +1,6 @@
 import { Router } from "express";
-import {  capturePaymentOrderCtrl, postPaypalOrderCtrl, postPaypalTokenCtrl } from "../controllers/paypal.Payment.controller";
-import { checkAuthorization } from "../middlewares/request.middleware";
+import {  capturePaymentOrderCtrl, postPaypalOrderCtrl, postPaypalTokenCtrl } from "../controllers/paypal.Payment.controller.js";
+import { checkAuthorization } from "../middlewares/request.middleware.js";
 
 const server = Router();
 

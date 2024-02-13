@@ -1,6 +1,6 @@
 "use strict";
 // import { Router } from "express";
-// import { checkAuthorization } from "../middlewares/request.middleware";
+// import { checkAuthorization } from "../middlewares/request.middleware.js";
 // const server = Router()
 // server.get("/api/profile/general", checkAuthorization,getUserGeneralProfileCtrl);
 // server.get("/api/profile/settings", checkAuthorization,getUserSettingsCtrl);

@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import {  capturePaymentOrder, createpaypalOrder,  getPaypalToken } from "../services/paypalPayment.service"
+import {  capturePaymentOrder, createpaypalOrder,  getPaypalToken } from "../services/paypalPayment.service.js"
 
 export const postPaypalTokenCtrl= async ( res: Response) => {
     try {

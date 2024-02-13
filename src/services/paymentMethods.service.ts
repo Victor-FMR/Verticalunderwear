@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-import { User } from "../interfaces/user.interface";
-import { hashpassword } from "../utils/bcrypt.handles";
+import { User } from "../interfaces/user.interface.js";
+import { hashpassword } from "../utils/bcrypt.handles.js";
 const Prisma = new PrismaClient();
 
 export const createdPaymentMethods = async (req: Request, res: Response) => {
