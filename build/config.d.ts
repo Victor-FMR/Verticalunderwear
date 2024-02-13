@@ -1,0 +1,15 @@
+import "dotenv/config";
+export declare const AWS_ID_PUBLIC_KEY: string;
+export declare const AWS_ID_SECRET_KEY: string;
+export declare const AWS_NAME_BUCKET: string;
+export declare const AWS_PUBLIC_REGION: string | undefined;
+export declare const PAYPAL_API: string;
+export declare const PAYPAL_CLIENT_ID: string;
+export declare const PAYPAL_CLIENT_SECRET: string;
+export declare const SECRET_TOKEN: string;
+export declare const REFRESH_TOKEN: string;
+export declare const SESSION_SECRET: string;
+export declare const PORT: string | undefined;
+export declare const GOOGLE_CLIENT_ID: string;
+export declare const GOOGLE_CLIENT_SECRET: string;
+export declare const GOOGLE_CALLBACK_URL: string;
