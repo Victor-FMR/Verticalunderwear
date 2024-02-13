@@ -5,6 +5,7 @@ export const AWS_ID_SECRET_KEY = process.env.AWS_ID_SECRET_KEY as string;
 export const AWS_NAME_BUCKET = process.env.AWS_NAME_BUCKET as string;
 export const AWS_PUBLIC_REGION = process.env.AWS_BUCKET_REGION;
 
+
 //PAYPAL
 export const PAYPAL_API = process.env.PAYPAL_API  as string
 export const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID  as string
