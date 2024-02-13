@@ -7,7 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-<<<<<<< HEAD
 
 model ShoppingCart {
   idShoppingCart String    @id @default(uuid()) @db.Uuid
@@ -113,108 +112,6 @@ model Order {
   updatedAt     DateTime    @updatedAt
   status        OrderStatus
   user          User        @relation(fields: [userId], references: [id])
-=======
-model User {
-  id           Int       @id @default(autoincrement())
-  username     String
-  email        String    @unique
-  phone_number String?
-  age          Int?
-  password     String
-  is_active    Boolean?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  lastname     String
-  addresses    Address[] @relation("UserAddresses")
-  orders       Order[]
-  ratings      Rating[]
-  sessions     Session[] @relation("UserSessions")
-}
-
-model GoogleAuth {
-  id             Int      @id @default(autoincrement())
-  googleId       String   @unique
-  googleUsername String
-  googleEmail    String   @unique
-  googlePhone    String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-}
-
-model Session {
-  id        String   @id @default(uuid())
-  userId    Int
-  token     String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation("UserSessions", fields: [userId], references: [id])
-}
-
-model Address {
-  id        Int      @id @default(autoincrement())
-  street    String
-  city      String
-  zipcode   String
-  country   String
-  userId    Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation("UserAddresses", fields: [userId], references: [id])
-}
-
-model Product {
-  id           Int               @id @default(autoincrement())
-  price        Float
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  description  String?
-  name_product String
-  stock        Int
-  orders       OrderItem[]
-  ratings      Rating[]
-  categories   ProductCategory[] @relation("ProductCategories")
-}
-
-model ProductCategory {
-  id        Int       @id @default(autoincrement())
-  name      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  products  Product[] @relation("ProductCategories")
-}
-
-model Order {
-  id            Int         @id @default(autoincrement())
-  userId        Int
-  totalPrice    Float
-  paymentMethod String
-  createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
-  status        OrderStatus
-  user          User        @relation(fields: [userId], references: [id])
-  products      OrderItem[]
-}
-
-model OrderItem {
-  id        Int     @id @default(autoincrement())
-  orderId   Int
-  productId Int
-  quantity  Int
-  order     Order   @relation(fields: [orderId], references: [id])
-  product   Product @relation(fields: [productId], references: [id])
-}
-
-model Rating {
-  id        Int      @id @default(autoincrement())
-  userId    Int
-  productId Int
-  stars     Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  comment   String?
-  product   Product  @relation(fields: [productId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
->>>>>>> 300602aec16cc16a19f4aab068bc647609730ab2
 }
 
 enum OrderStatus {
@@ -224,12 +121,9 @@ enum OrderStatus {
   DELIVERED
   CANCELED
 }
-<<<<<<< HEAD
 
 enum Roles {
   ADMINISTRADOR
   MIEMBRO
   CLIENTE
 }
-=======
->>>>>>> 300602aec16cc16a19f4aab068bc647609730ab2
