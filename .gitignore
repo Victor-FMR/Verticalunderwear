@@ -1,5 +1,4 @@
 node_modules
-config.ts
 .env
 .gitlab-ci.yml
 fina;;.txt
