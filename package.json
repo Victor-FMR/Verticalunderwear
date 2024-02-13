@@ -4,9 +4,9 @@
   "description": "Backend, para un Ecommerce de Ropa de Mujeres",
   "main": "index.js",
   "scripts": {
-    "build": "tcs",
-    "dev": "ts-node ./src/index.ts",
-    "start": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
+    "dev": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

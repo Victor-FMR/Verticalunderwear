@@ -6,6 +6,7 @@ export const generateAccessToken = (payload) => {
         const token = Jwt.sign(payload, SECRET_TOKEN, { expiresIn: "1D" });
         logger.info('Token Generado');
         //console.log({ message: "Token Generado"});
+        //res.cookie('token', token)
         return token;
     }
     catch (error) {

@@ -15,6 +15,7 @@ export const registerNewUser = async (req, res) => {
         if (password !== confirmPassword) {
             return res.status(401).json({ message: "las contraseñas no coinciden" });
         }
+        //scritando contraseña
         const hashing = await hashpassword(password);
         const newUser = await Prisma.user.create({
             data: {

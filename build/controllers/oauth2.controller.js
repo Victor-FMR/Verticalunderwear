@@ -1,3 +1,3 @@
-export const googleCtrl = (req, res) => {
+export const googleCtrl = (res) => {
     res.redirect('/');
 };

@@ -31,7 +31,7 @@ export const createpaypalOrder = async (req, res) => {
             intent: "CAPTURE",
             purchase_units: [
                 {
-                    reference_id: PAYPAL_CLIENT_ID,
+                    reference_id: PAYPAL_CLIENT_ID, // The reference ID for the transaction in your system.
                     amount: {
                         currency_code: "USD",
                         value: shop.totalPrice // The amount of the transaction in the currency specified above.

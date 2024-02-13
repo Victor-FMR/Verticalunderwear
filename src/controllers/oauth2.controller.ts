@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
+import {  Response } from "express";
 
-export const googleCtrl = (req: Request, res: Response)=>{
+export const googleCtrl = ( res: Response)=>{
     res.redirect('/')
 
 }
