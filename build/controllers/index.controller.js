@@ -10,11 +10,11 @@ export const homeCtrl = async (res) => {
                 image: true,
             },
         });
-        res.status(200).json({ message: "Enviado", Data });
+        return res.status(200).json({ message: "Enviado", Data });
     }
     catch (error) {
         console.log(error);
-        res.status(500).json('error por parte del servidor');
+        return res.status(500).json('error por parte del servidor');
     }
 };
 export const womenCtrl = (res) => {

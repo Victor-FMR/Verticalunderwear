@@ -15,34 +15,34 @@ export const homeCtrl = async ( res: Response) => {
       },
     });
 
-    res.status(200).json({ message: "Enviado", Data });
+   return res.status(200).json({ message: "Enviado", Data });
   } catch (error) {
     console.log(error)
-    res.status(500).json('error por parte del servidor',)
+   return res.status(500).json('error por parte del servidor',)
   }
 };
 
 export const womenCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde Women" });
+  return res.status(200).json({ message: "Saludos desde Women" });
 };
 
 export const saleCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde Sales" });
+ return  res.status(200).json({ message: "Saludos desde Sales" });
 };
 export const rewardsCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde rewards" });
+ return  res.status(200).json({ message: "Saludos desde rewards" });
 };
 export const newCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde New" });
+  return res.status(200).json({ message: "Saludos desde New" });
 };
 
 export const brandCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde Brands" });
+  return res.status(200).json({ message: "Saludos desde Brands" });
 };
 export const accessoriesCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde accessories" });
+  return res.status(200).json({ message: "Saludos desde accessories" });
 };
 export const youthCtrl = ( res: Response) => {
-  res.status(200).json({ message: "Saludos desde Youth" });
+  return res.status(200).json({ message: "Saludos desde Youth" });
 };
 
