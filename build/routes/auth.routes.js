@@ -9,4 +9,3 @@ server.post('/auth/login', limiter, loginCtrl);
 server.post("/refresh-token", checkAuthorization, refreshCtrl);
 server.post('/logout', checkAuthorization, logoutCtrl);
 export default server;
-//# sourceMappingURL=auth.routes.js.map

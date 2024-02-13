@@ -8,4 +8,3 @@ server.post('/api/products', checkAuthorization, createdProductsCtrl);
 server.put('/api/products/:id', checkAuthorization, putProductsCtrl);
 server.delete('/api/products/:id', checkAuthorization);
 export default server;
-//# sourceMappingURL=products.routes.js.map

@@ -15,7 +15,6 @@ export const registerNewUser = async (req, res) => {
         if (password !== confirmPassword) {
             return res.status(401).json({ message: "las contraseñas no coinciden" });
         }
-        //scritando contraseña
         const hashing = await hashpassword(password);
         const newUser = await Prisma.user.create({
             data: {
@@ -46,7 +45,7 @@ export const registerNewUser = async (req, res) => {
     catch (error) {
         logger.error("Error del Servidor");
         //console.log(error);
-        res.status(500).json({ message: "Error del Servidor" });
+        return res.status(500).json({ message: "Error del Servidor" });
     }
     finally {
         await Prisma.$disconnect();
@@ -84,11 +83,10 @@ export const login = async (req, res) => {
             //sameSite: "none",
         });
         const user = { id: correct.id, name: correct.username };
-        const data = { accessToken, refreshToken, user };
+        const data = { accessToken, refreshToken, user, verifyAccess, verifyRefresh };
         return res.status(200).json(data);
     }
     catch (error) {
-        res.status(500).json({ message: "Error al Iniciar Sesion" });
+        return res.status(500).json({ message: "Error al Iniciar Sesion" });
     }
 };
-//# sourceMappingURL=auth.service.js.map

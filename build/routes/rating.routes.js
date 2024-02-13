@@ -6,4 +6,3 @@ server.get('/api/rating/:id');
 server.put('/api/rating/:id');
 server.delete('/api/rating/:id');
 export default server;
-//# sourceMappingURL=rating.routes.js.map

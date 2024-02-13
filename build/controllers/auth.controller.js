@@ -14,7 +14,7 @@ export const loginCtrl = async (req, res) => {
     }
     catch (error) { }
 };
-export const logoutCtrl = async (req, res) => {
+export const logoutCtrl = async (res) => {
     res.clearCookie('accessToken');
     res.clearCookie('refreshToken');
     res.status(200).json({ message: 'cerro sesion' });
@@ -41,4 +41,3 @@ export const refreshCtrl = async (req, res) => {
         return res.status(500).json({ message: 'Error al renovar el token' });
     }
 };
-//# sourceMappingURL=auth.controller.js.map

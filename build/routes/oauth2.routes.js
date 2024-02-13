@@ -8,4 +8,3 @@
 //     res.redirect('/')
 // })
 // export default server;
-//# sourceMappingURL=oauth2.routes.js.map

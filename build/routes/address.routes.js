@@ -9,4 +9,3 @@ server.get('/api/address/:id');
 server.put('/api/address/:id', checkAuthorization, putAddressCtrl);
 server.delete('/api/address/:id', checkAuthorization, deleteAddressCtrl);
 export default server;
-//# sourceMappingURL=address.routes.js.map

@@ -7,4 +7,3 @@ export const limiter = rateLimit({
     message: "Demasiados intentos,intentelo de nuevo dentro de 15 minutos",
     statusCode: 423,
 });
-//# sourceMappingURL=rateLimit.middleware.js.map

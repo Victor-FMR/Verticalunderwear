@@ -39,6 +39,7 @@ export const addShoppingcart = async (req, res, id) => {
     }
     catch (error) {
         console.log(error);
+        return res.status(500).json({ message: "Error al agregar producto al carrito" });
     }
 };
 //NOTE - aptualizar productos del carrito de compras 
@@ -71,6 +72,7 @@ export const updateShoppingcart = async (req, res, id) => {
         return res.status(200).json({ message: 'Carrito Actualizado', DATA });
     }
     catch (error) {
+        return res.status(500).json({ message: "Error al actualizar Carrito", });
         console.log(error);
     }
 };
@@ -110,42 +112,40 @@ export const dismShoppingcart = async (req, res, id) => {
     }
     catch (error) {
         console.log(error);
+        return res.status(500).json({ message: "Error al disminui Carrito" });
     }
 };
-export const deleteShoppingcart = async (req, res, id) => {
-    const userId = req.user.id;
-    try {
-        const foundCart = await Prisma.shoppingCart.findUnique({
-            where: { userId: userId },
-            include: { products: true },
-        });
-        const product = await Prisma.product.findUnique({ where: { idProduct: id } });
-        if (!product) {
-            return res.status(404).json({ message: "producto no encontrado" });
-        }
-        if (foundCart) {
-            const priceToRemove = Math.min(product.price, foundCart.totalPrice);
-            await Prisma.shoppingCart.update({
-                where: { userId: userId },
-                data: {
-                    quantity: Math.max(foundCart.quantity - 1, 0),
-                    totalPrice: Math.max(foundCart.totalPrice * priceToRemove, 0),
-                    products: { disconnect: [{ idProduct: id }] }
-                },
-            });
-        }
-        const actualizado = await Prisma.shoppingCart.findFirst({ where: { userId: userId }, include: { products: { select: { idProduct: true, productName: true, description: true, price: true, image: true } } } });
-        const DATA = {
-            userId: actualizado.userId,
-            idShoppingCart: actualizado.idShoppingCart,
-            products: actualizado.products,
-            quantity: actualizado.quantity,
-            totalPrice: actualizado.totalPrice,
-        };
-        return res.status(200).json({ message: 'Producto Eliminado del Carrito', DATA });
-    }
-    catch (error) {
-        console.log(error);
-    }
-};
-//# sourceMappingURL=shoppingCart.service.js.map
+// export const deleteShoppingcart = async (req: Request, res: Response, id: string) => {
+//   const userId = (req.user as User).id
+//   try {
+//     const foundCart = await Prisma.shoppingCart.findUnique({
+//       where: { userId: userId},
+//       include: { products: true},
+//     });
+//     const product = await Prisma.product.findUnique({where: {idProduct: id}})
+//     if(!product){
+//       return res.status(404).json({message:"producto no encontrado"})
+//     }
+//     if (foundCart) {
+//       const priceToRemove = Math.min(product.price, foundCart.totalPrice)
+//       await Prisma.shoppingCart.update({
+//         where: { userId: userId },
+//         data: { 
+//           quantity:Math.max(foundCart.quantity - 1, 0), 
+//           totalPrice: Math.max(foundCart.totalPrice * priceToRemove, 0),
+//           products:{disconnect: [{idProduct: id}]}},
+//       });
+//     } 
+//     const actualizado = await Prisma.shoppingCart.findFirst({where: {userId: userId},include:{products: {select:{idProduct: true,productName: true, description: true, price:true,image: true}}}})
+//     const DATA= {
+//       userId : actualizado.userId,
+//       idShoppingCart: actualizado.idShoppingCart,
+//       products: actualizado.products,
+//       quantity: actualizado.quantity,
+//       totalPrice: actualizado.totalPrice,
+//     }
+//     return res.status(200).json({message: 'Producto Eliminado del Carrito', DATA})
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };

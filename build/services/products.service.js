@@ -41,19 +41,18 @@ export const updateProducts = async (req, res) => {
             where: { idProduct: id },
         });
         console.log({
-            id: update.id,
+            id: update.idProduct,
             name: update.productName,
             imagen: update.image,
         });
+        return res.status(200).json({ message: "Producto Actualizado" });
     }
     catch (error) {
         return res.status(500).json({ message: "Error Interno del Servidor" });
     }
 };
-const deletedProducts = (req, res) => {
-    const { id } = req.body;
-    try {
-    }
-    catch (error) { }
-};
-//# sourceMappingURL=products.service.js.map
+// const deletedProducts = (req: Request, res: Response) => {
+//   const { id } = req.body;
+//   try {
+//   } catch (error) {}
+// };

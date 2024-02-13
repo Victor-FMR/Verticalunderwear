@@ -37,4 +37,3 @@ app.use(addressRoutes);
 app.use(PaypalRoutes);
 //app.use(uploadRoutes)
 export default app;
-//# sourceMappingURL=app.js.map

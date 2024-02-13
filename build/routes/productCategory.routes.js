@@ -7,4 +7,3 @@
 // server.put('/api/categories/:id')
 // server.delete('/api/categories/:id')
 // export default server
-//# sourceMappingURL=productCategory.routes.js.map

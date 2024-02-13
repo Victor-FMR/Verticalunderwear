@@ -1,5 +1,6 @@
 import { verifyAccessToken } from "../utils/jwt.handles";
 import { SECRET_TOKEN } from "../config";
+//import { JwtPayload } from "../interfaces/user.interface";
 export const checkAuthorization = (req, res, next) => {
     const token = req.cookies.accessToken;
     try {
@@ -15,11 +16,10 @@ export const checkAuthorization = (req, res, next) => {
         //   return res.status(403).send("Invalid Token OR Expired");
         // }
         req.user = verify;
-        next();
+        return next();
     }
     catch (error) {
         console.log(error);
-        res.status(401).json({ message: 'sesion no valida' });
+        return res.status(401).json({ message: 'sesion no valida' });
     }
 };
-//# sourceMappingURL=request.middleware.js.map

@@ -14,4 +14,3 @@ export const isNotAuth2 = (req, res, next) => {
         next();
     }
 };
-//# sourceMappingURL=oauth2.handles.js.map

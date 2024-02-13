@@ -1,4 +1,5 @@
-import { S3Client, PutObjectCommand, GetObjectCommand, ListObjectsCommand } from "@aws-sdk/client-s3";
+//import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client, PutObjectCommand, GetObjectCommand, ListObjectsCommand, } from "@aws-sdk/client-s3";
 import { AWS_ID_PUBLIC_KEY, AWS_ID_SECRET_KEY, AWS_NAME_BUCKET, AWS_PUBLIC_REGION } from "../config";
 const client = new S3Client({
     region: AWS_PUBLIC_REGION,
@@ -19,4 +20,3 @@ export const getFiles = async () => {
     const command = new ListObjectsCommand({ Bucket: AWS_NAME_BUCKET });
     return await client.send(command);
 };
-//# sourceMappingURL=s3.aws.js.map

@@ -23,7 +23,7 @@ const Prisma = new PrismaClient();
 export const createpaypalOrder = async (req, res) => {
     const userId = req.user;
     try {
-        const selectAddress = await Prisma.address.findFirst({ where: { userId: userId.id } });
+        //const selectAddress =await  Prisma.address.findFirst({where: {userId:userId.id }})
         const shop = await Prisma.shoppingCart.findUnique({ where: { userId: userId.id } });
         // Obtener el token de acceso de PayPal
         const access_token = await getPaypalToken(res);
@@ -36,14 +36,14 @@ export const createpaypalOrder = async (req, res) => {
                         currency_code: "USD",
                         value: shop.totalPrice // The amount of the transaction in the currency specified above.
                     },
-                    shipping: {
-                        address: {
-                            address_line_1: selectAddress.street,
-                            admin_area_1: selectAddress.city,
-                            postal_code: selectAddress.zipcode,
-                            country_code: selectAddress.country
-                        }
-                    }
+                    // shipping:{
+                    //   address:{
+                    //     address_line_1: selectAddress.street,
+                    //     admin_area_1: selectAddress.city,
+                    //     postal_code: selectAddress.zipcode,
+                    //     country_code: selectAddress.country      
+                    //   }
+                    // }
                 },
             ],
             payment_source: {
@@ -71,28 +71,27 @@ export const createpaypalOrder = async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.status(503).send("Error creating PayPal order");
+        return res.status(503).send("Error creating PayPal order");
     }
 };
-export const detailsPaypalOrder = async (req, res) => {
-    try {
-        const { token } = req.query;
-        const { data } = await axios.get(`${PAYPAL_API}/v2/checkout/orders/details/${token}`, {
-            auth: {
-                username: PAYPAL_CLIENT_ID,
-                password: PAYPAL_CLIENT_SECRET,
-            }
-        });
-        return res.status(200).json({ message: "Detalles de pedido" });
-    }
-    catch (error) {
-        console.log(error);
-        res.status(503).send("Error getting PayPal order details");
-    }
-};
+// export const detailsPaypalOrder = async(req: Request,res: Response) => {
+//   try {
+//     const { token } = req.query
+//      const {data}  =await axios.get(`${PAYPAL_API}/v2/checkout/orders/details/${token}`, {
+//        auth: {
+//          username: PAYPAL_CLIENT_ID,
+//          password: PAYPAL_CLIENT_SECRET,
+//        }
+//      })
+//      return res.status(200).json({message:"Detalles de pedido"})
+//   } catch (error) {
+//     console.log(error)
+//     res.status(503).send("Error getting PayPal order details");
+//   }
+// }
 export const capturePaymentOrder = async (req, res) => {
     try {
-        const userId = req.user;
+        //const userId= (req.user as User)
         const { token } = req.query;
         const response = await axios.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {}, {
             auth: {
@@ -108,4 +107,3 @@ export const capturePaymentOrder = async (req, res) => {
         return res.status(500).send("Error capturing PayPal payment");
     }
 };
-//# sourceMappingURL=paypalPayment.service.js.map

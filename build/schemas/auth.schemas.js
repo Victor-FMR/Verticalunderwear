@@ -1,3 +1,4 @@
+//import { NextFunction } from "express";
 import z from "zod";
 export const registerSchema = z.object({
     username: z
@@ -16,4 +17,3 @@ export const registerSchema = z.object({
         .trim(),
     password: z.string({ required_error: "Password is Required" }).min(8, { message: "Passwors the 8 caracter minimun" })
 });
-//# sourceMappingURL=auth.schemas.js.map

@@ -1,4 +1,4 @@
-import { addShoppingcart, updateShoppingcart, deleteShoppingcart, dismShoppingcart, } from "../services/shoppingCart.service";
+import { addShoppingcart, updateShoppingcart, dismShoppingcart } from "../services/shoppingCart.service";
 export const addCartCtrl = async (req, res) => {
     try {
         await addShoppingcart(req, res, req.params.id);
@@ -20,11 +20,9 @@ export const dismiCartCtrl = async (req, res) => {
     }
     catch (error) { }
 };
-export const deleteCartCtrl = async (req, res) => {
-    try {
-        const result = await deleteShoppingcart(req, res, req.params.id);
-        res.json(result);
-    }
-    catch (error) { }
-};
-//# sourceMappingURL=shoppingCart.controller.js.map
+// export const deleteCartCtrl = async (req: Request, res: Response) => {
+//   try {
+//     const result = await deleteShoppingcart(req, res, req.params.id);
+//     res.json(result);
+//   } catch (error) {}
+// };

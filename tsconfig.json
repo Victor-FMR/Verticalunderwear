@@ -11,8 +11,8 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": false, // Cambiado a false para permitir JavaScript sin verificación de tipos
-    "declaration": true, // Genera archivos .d.ts para proyectos de biblioteca
-    "sourceMap": true, // Genera mapas de fuente para depuración
+    //"declaration": false, // Genera archivos .d.ts para proyectos de biblioteca
+    //"sourceMap": false, // Genera mapas de fuente para depuración
     "rootDir": "./src", // Especifica el directorio raíz de los archivos de entrada
     "removeComments": false, // No eliminar comentarios, útil para documentación
     "noImplicitReturns": true, // Asegura que todas las ramas de una función tengan un retorno

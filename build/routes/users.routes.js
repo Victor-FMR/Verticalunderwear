@@ -6,4 +6,3 @@ server.post('/api/user/:id');
 server.put('/api/user/:id');
 server.delete('/api/user/:id');
 export default server;
-//# sourceMappingURL=users.routes.js.map

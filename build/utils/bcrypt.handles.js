@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+//import { Request } from "express";
 import { logger } from "../logs/pino.logger";
 export const hashpassword = async (pass) => {
     try {
@@ -7,7 +8,7 @@ export const hashpassword = async (pass) => {
         return hash;
     }
     catch (error) {
-        console.log("Error hashing password", error);
+        return console.log("Error hashing password", error);
     }
 };
 export const compare = async (check, hashpassword) => {
@@ -18,7 +19,6 @@ export const compare = async (check, hashpassword) => {
         return isOK;
     }
     catch (error) {
-        console.log("Error al comparar comtraseña", error);
+        return console.log("Error al comparar comtraseña", error);
     }
 };
-//# sourceMappingURL=bcrypt.handles.js.map

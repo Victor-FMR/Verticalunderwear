@@ -7,4 +7,3 @@ server.get('/api/payment-methods', checkAuthorization, getUserPaymentMethodsCtrl
 server.put('/api/payment-methods/:id', checkAuthorization, putUserPaymentMethodsCtrl);
 server.delete('/api/payment-methods/:id', checkAuthorization, deleteUserPaymentMethodsCtrl);
 export default server;
-//# sourceMappingURL=paymentMethods.routes.js.map

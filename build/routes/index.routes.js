@@ -11,4 +11,3 @@ server.get('/collections/accessories-shop-all', accessoriesCtrl);
 server.get('/collections/rewards-shop-all', rewardsCtrl);
 server.get('/collections/youth-shop-all', youthCtrl);
 export default server;
-//# sourceMappingURL=index.routes.js.map

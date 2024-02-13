@@ -7,7 +7,6 @@ export const database = async () => {
         });
     }
     catch (error) {
-        console.log('error al conectar con la basedatos', error);
+        console.log('Error al conectar con la Basedatos', error);
     }
 };
-//# sourceMappingURL=database.js.map

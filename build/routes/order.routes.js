@@ -9,4 +9,3 @@ server.post('/api/orders/user/:id');
 server.put('/api/orders/user/:id');
 server.delete('/api/orders/user/:id');
 export default server;
-//# sourceMappingURL=order.routes.js.map

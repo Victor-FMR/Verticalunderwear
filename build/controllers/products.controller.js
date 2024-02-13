@@ -1,5 +1,5 @@
 import { createdProducts, getProducts, getProductsByName, updateProducts, } from "../services/products.service";
-export const productsCtrl = async (req, res) => {
+export const productsCtrl = async (res) => {
     const result = await getProducts();
     res.json(result);
 };
@@ -18,4 +18,3 @@ export const putProductsCtrl = async (req, res) => {
     }
     catch (error) { }
 };
-//# sourceMappingURL=products.controller.js.map

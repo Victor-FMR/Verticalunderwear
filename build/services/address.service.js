@@ -20,7 +20,7 @@ export const createdAddress = async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al Crear Direccion" });
+        return res.status(500).json({ message: "Error al Crear Direccion" });
     }
 };
 export const getAddress = async (req, res) => {
@@ -45,7 +45,7 @@ export const getAddress = async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al Mostrar Direcciones" });
+        return res.status(500).json({ message: "Error al Mostrar Direcciones" });
     }
 };
 export const putAddress = async (req, res) => {
@@ -69,11 +69,11 @@ export const putAddress = async (req, res) => {
                 user: { connect: { id: userId.id } },
             },
         });
-        res.status(200).json({ message: "Direccion Actualizada", updateAddress });
+        return res.status(200).json({ message: "Direccion Actualizada", updateAddress });
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al Actualizar Direccion" });
+        return res.status(500).json({ message: "Error al Actualizar Direccion" });
     }
 };
 export const deleteAddress = async (req, res) => {
@@ -89,12 +89,11 @@ export const deleteAddress = async (req, res) => {
         const deleteAddress = await Prisma.address.delete({
             where: { idAddress: addressId, userId: userId.id },
         });
-        res.status(200).json({ message: "Direccion Eliminada", deleteAddress });
+        return res.status(200).json({ message: "Direccion Eliminada", deleteAddress });
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al Eliminar Direccion" });
+        return res.status(500).json({ message: "Error al Eliminar Direccion" });
     }
 };
-const getByAddress = (req, res) => { };
-//# sourceMappingURL=address.service.js.map
+//const getByAddress = (req: Request, res: Response) => {};

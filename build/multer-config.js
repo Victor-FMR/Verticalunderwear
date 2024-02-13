@@ -1,4 +1,5 @@
 import multer from "multer";
+//import path from "path";
 // const storage = multer.diskStorage({
 //     destination: (req, file, cb)=>{
 //         cb(null, path.join(__dirname, '/uploads') )
@@ -9,4 +10,3 @@ import multer from "multer";
 // })
 const upload = multer({ storage: multer.memoryStorage() });
 export default upload;
-//# sourceMappingURL=multer-config.js.map

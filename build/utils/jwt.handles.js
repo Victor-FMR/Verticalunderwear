@@ -6,7 +6,6 @@ export const generateAccessToken = (payload) => {
         const token = Jwt.sign(payload, SECRET_TOKEN, { expiresIn: "1D" });
         logger.info('Token Generado');
         //console.log({ message: "Token Generado"});
-        //res.cookie('token', token)
         return token;
     }
     catch (error) {
@@ -31,7 +30,7 @@ export const verifyAccessToken = (payload, jwt) => {
         return verify;
     }
     catch (error) {
-        console.error("Error al verififcar token", error instanceof Error ? error.message : error);
+        return console.error("Error al verififcar token", error instanceof Error ? error.message : error);
     }
 };
 export const verifyRefreshToken = (payload, jwt) => {
@@ -41,7 +40,7 @@ export const verifyRefreshToken = (payload, jwt) => {
         return verify;
     }
     catch (error) {
-        console.error("Error al verififcar token", error instanceof Error ? error.message : error);
+        return console.error("Error al verififcar token", error instanceof Error ? error.message : error);
     }
 };
 // export const decodedToken = (token : string, jwt: string) => {
@@ -54,4 +53,3 @@ export const verifyRefreshToken = (payload, jwt) => {
 //     throw new Error("No se pudo decodificar el token");
 //   }
 // };
-//# sourceMappingURL=jwt.handles.js.map

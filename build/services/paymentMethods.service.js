@@ -34,14 +34,14 @@ export const createdPaymentMethods = async (req, res) => {
                 user: { connect: { id: userId.id } },
             },
         });
-        res.status(201).json({
+        return res.status(201).json({
             message: "Metodo de Pago Creado Correctamente",
             newPaymentMethod,
         });
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al Crear un Metodo de Pago" });
+        return res.status(500).json({ message: "Error al Crear un Metodo de Pago" });
     }
 };
 export const getPaymentMethods = async (req, res) => {
@@ -62,11 +62,11 @@ export const getPaymentMethods = async (req, res) => {
         if (!paymentMethods) {
             return res.status(400).json({ message: "No hay Metodos de Pago" });
         }
-        res.status(200).json({ message: "Metodos de Pago", paymentMethods });
+        return res.status(200).json({ message: "Metodos de Pago", paymentMethods });
     }
     catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error al Obtener Metodos de Pago" });
+        return res.status(500).json({ message: "Error al Obtener Metodos de Pago" });
     }
 };
 export const putPaymentMethods = async (req, res) => {
@@ -99,8 +99,7 @@ export const putPaymentMethods = async (req, res) => {
     }
     catch (error) {
         console.log("ERROR AL ACTUALIZAR EL METODO DE", error);
-        res.status(500).json({ message: "Error al Actualizar Metodo de Pago" });
+        return res.status(500).json({ message: "Error al Actualizar Metodo de Pago" });
     }
 };
-export const deletePaymentMethods = async (req, res) => { };
-//# sourceMappingURL=paymentMethods.service.js.map
+//export const deletePaymentMethods = async (req: Request, res: Response) => {};

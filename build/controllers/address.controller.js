@@ -1,6 +1,4 @@
-import { PrismaClient } from "@prisma/client";
 import { createdAddress, deleteAddress, getAddress, putAddress } from "../services/address.service";
-const Prisma = new PrismaClient();
 export const postAddressCtrl = async (req, res) => {
     try {
         const result = await createdAddress(req, res);
@@ -29,4 +27,3 @@ export const deleteAddressCtrl = async (req, res) => {
     }
     catch (error) { }
 };
-//# sourceMappingURL=address.controller.js.map

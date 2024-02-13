@@ -22,4 +22,3 @@
 //     res.json({result})
 //  })
 // export default server
-//# sourceMappingURL=upload.routes.js.map

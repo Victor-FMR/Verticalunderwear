@@ -6,4 +6,3 @@ database();
 app.listen(PORT, () => {
     console.log(`*** SERVER ABIERTO IN ${PORT} ***`);
 });
-//# sourceMappingURL=index.js.map
