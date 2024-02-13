@@ -1,9 +1,9 @@
 import { PrismaClient } from "@prisma/client";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 const Prisma = new PrismaClient();
 
-export const homeCtrl = async ( res: Response) => {
+export const homeCtrl = async (_req: Request, res: Response) => {
   try {
     const Data = await Prisma.product.findMany({
       select: {
@@ -22,27 +22,27 @@ export const homeCtrl = async ( res: Response) => {
   }
 };
 
-export const womenCtrl = ( res: Response) => {
+export const womenCtrl = ( _req:Request, res: Response) => {
   return res.status(200).json({ message: "Saludos desde Women" });
 };
 
-export const saleCtrl = ( res: Response) => {
+export const saleCtrl = (_req:Request,  res: Response) => {
  return  res.status(200).json({ message: "Saludos desde Sales" });
 };
-export const rewardsCtrl = ( res: Response) => {
+export const rewardsCtrl = (_req:Request,  res: Response) => {
  return  res.status(200).json({ message: "Saludos desde rewards" });
 };
-export const newCtrl = ( res: Response) => {
+export const newCtrl = ( _req:Request, res: Response) => {
   return res.status(200).json({ message: "Saludos desde New" });
 };
 
-export const brandCtrl = ( res: Response) => {
+export const brandCtrl = ( _req:Request, res: Response) => {
   return res.status(200).json({ message: "Saludos desde Brands" });
 };
-export const accessoriesCtrl = ( res: Response) => {
+export const accessoriesCtrl = ( _req:Request, res: Response) => {
   return res.status(200).json({ message: "Saludos desde accessories" });
 };
-export const youthCtrl = ( res: Response) => {
+export const youthCtrl = ( _req: Request,res: Response) => {
   return res.status(200).json({ message: "Saludos desde Youth" });
 };
 
