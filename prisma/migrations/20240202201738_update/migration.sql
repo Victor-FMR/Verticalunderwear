@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "ShoppingCart" ALTER COLUMN "quantity" DROP NOT NULL,
-ALTER COLUMN "quantity" SET DEFAULT 1,
-ALTER COLUMN "totalPrice" DROP NOT NULL;
