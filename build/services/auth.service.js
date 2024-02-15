@@ -25,7 +25,7 @@ export const registerNewUser = async (req, res) => {
                 password: hashing,
                 roles: ["CLIENTE"],
                 shoppingCarts: {
-                    create: { quantity: 0, totalPrice: 0 },
+                    create: { quantity: 0, totalPrice: 0 }
                 },
             },
         });
@@ -41,7 +41,7 @@ export const registerNewUser = async (req, res) => {
         res.cookie("token", token);
         //req.user = co
         const data = { token, user };
-        return data;
+        return res.status(202).json(data);
     }
     catch (error) {
         logger.error("Error del Servidor");

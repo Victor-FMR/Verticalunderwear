@@ -5,7 +5,7 @@ const Prisma = new PrismaClient();
 
 //obtener todos los productos
 export const getProducts = async () => {
-  const result = await Prisma.product.findMany({select: {idProduct: true,productName: true,description:true,price:true,image: true}});
+  const result = await Prisma.product.findMany({select: {idProduct: true,productName: true,description:true,price:true,imageUrl: true}});
   return result;
 };
 
@@ -28,7 +28,8 @@ export const createdProducts = async (req: Request) => {
       description: description ,
       price: price  ,
       stock: parseInt(stock),
-      image: urlImage ,
+      imageUrl: urlImage ,
+
     },
     
   });
@@ -52,7 +53,7 @@ export const updateProducts = async (req: Request, res: Response) => {
     console.log({
       id: update.idProduct,
       name: update.productName,
-      imagen: update.image,
+      imagen: update.imageUrl,
     });
     return res.status(200).json({ message: "Producto Actualizado" });
   } catch (error) {

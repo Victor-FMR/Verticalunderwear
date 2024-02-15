@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const Prisma = new PrismaClient();
 //obtener todos los productos
 export const getProducts = async () => {
-    const result = await Prisma.product.findMany({ select: { idProduct: true, productName: true, description: true, price: true, image: true } });
+    const result = await Prisma.product.findMany({ select: { idProduct: true, productName: true, description: true, price: true, imageUrl: true } });
     return result;
 };
 //obtener los productos por nombre
@@ -23,7 +23,7 @@ export const createdProducts = async (req) => {
             description: description,
             price: price,
             stock: parseInt(stock),
-            image: urlImage,
+            imageUrl: urlImage,
         },
     });
     return newProduct;
@@ -43,7 +43,7 @@ export const updateProducts = async (req, res) => {
         console.log({
             id: update.idProduct,
             name: update.productName,
-            imagen: update.image,
+            imagen: update.imageUrl,
         });
         return res.status(200).json({ message: "Producto Actualizado" });
     }

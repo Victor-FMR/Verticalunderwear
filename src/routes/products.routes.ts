@@ -5,6 +5,8 @@ import { checkAuthorization } from "../middlewares/request.middleware.js";
 
 const server = Router()
 
+server.get('/api/product/details-product/:id', )
+
 server.get('/api/products', checkAuthorization,productsCtrl)
 
 server.get('/api/products/:name',checkAuthorization,getProductsByNameCtrl)

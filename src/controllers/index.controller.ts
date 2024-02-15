@@ -10,7 +10,7 @@ export const homeCtrl = async (_req: Request, res: Response) => {
         idProduct: true,
         productName: true,
         price: true,
-        image: true,
+        imageUrl: true,
         
       },
     });

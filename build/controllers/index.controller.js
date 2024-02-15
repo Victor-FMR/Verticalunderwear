@@ -7,7 +7,7 @@ export const homeCtrl = async (_req, res) => {
                 idProduct: true,
                 productName: true,
                 price: true,
-                image: true,
+                imageUrl: true,
             },
         });
         return res.status(200).json({ message: "Enviado", Data });
