@@ -38,7 +38,8 @@ model Product {
   ratings        Ratings[]
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
-  cartItems    CartItem[] 
+  cartItems      CartItem[] 
+  orderItems     OrderItem[]
   // Elimina la relación directa con ShoppingCart
 }
 
@@ -107,20 +108,30 @@ model Address {
 }
 
 model Order {
-  idOrder          String  @id @unique @default(uuid()) @db.Uuid
-  userId           String  @db.Uuid
-  orderNumber      String  @unique
-  addressIdAddress String  @db.Uuid
-  //products        Product[]
-  shippingAddress  Address @relation(fields: [addressIdAddress], references: [idAddress])
-  totalAmount      Decimal @db.Decimal(10, 2)
-
-  paymentMethod String
-  createdAt     DateTime    @default(now())
-  completedAt   DateTime
-  updatedAt     DateTime    @updatedAt
+  idOrder          String   @id @unique @default(uuid()) @db.Uuid
+  userId           String   @db.Uuid
+  orderNumber      String   @unique
+  addressId String   @db.Uuid
+  shippingAddress  Address  @relation(fields: [addressId], references: [idAddress])
+  paymentMethod    String
+  createdAt        DateTime    @default(now())
+  completedAt      DateTime?
+  updatedAt        DateTime    @updatedAt
+  totalAmount      Decimal  @db.Decimal(10, 2)
   status        OrderStatus
   user          User        @relation(fields: [userId], references: [id])
+  orderItems       OrderItem[]
+}
+
+
+model OrderItem {
+  idOrderItem String   @id @unique @default(uuid()) @db.Uuid
+  orderId     String   @db.Uuid
+  productId   String   @db.Uuid
+  quantity    Int
+  price       Decimal  @db.Decimal(9, 2)
+  order       Order    @relation(fields: [orderId], references: [idOrder])
+  product     Product  @relation(fields: [productId], references: [idProduct])
 }
 
 enum OrderStatus {
