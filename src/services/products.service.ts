@@ -3,6 +3,35 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 const Prisma = new PrismaClient();
 
+
+
+
+export const detailsProducts = async(req: Request, res: Response)=>{
+   const {id} = req.params;
+ try {
+  
+     const details = await Prisma.product.findUnique({where:{idProduct: id},
+      select:{
+        idProduct: true,
+        imageUrl: true,
+        productName: true,
+        description: true,
+        price: true,ratings:{select:{stars:true,comment:true}}}})
+
+      if(!details){
+        return res.status(404).json({message: "Detalles del Producto no encontrado"})
+      }
+      
+   
+  return res.status(200).json({Message: "Detalles del Producto Obtenido",details})
+ } catch (error) {
+  console.log(error)
+  return res.status(500).json({message:"Error al obtener detalles del Producto"})
+ }
+
+}
+
+
 //obtener todos los productos
 export const getProducts = async () => {
   const result = await Prisma.product.findMany({select: {idProduct: true,productName: true,description:true,price:true,imageUrl: true}});
