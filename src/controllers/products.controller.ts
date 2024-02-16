@@ -1,10 +1,25 @@
 import { Request, Response } from "express";
 import {
   createdProducts,
+  detailsProducts,
   getProducts,
   getProductsByName,
   updateProducts,
 } from "../services/products.service.js";
+
+
+
+export const detailsProductsCtrl = async ( req:Request,res: Response) => {
+  try {
+    const result = await detailsProducts(req,res);
+    res.json(result);
+  } catch (error) {
+    
+  }
+ 
+};
+
+
 
 export const productsCtrl = async ( res: Response) => {
   const result = await getProducts();
