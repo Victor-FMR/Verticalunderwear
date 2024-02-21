@@ -2,13 +2,15 @@
   "compilerOptions": {
     "outDir": "./build",
     "target": "ES2022", // Mejor equilibrio para modernidad y compatibilidad
-    "module": "ES2022", // Alineado con Node.js y compatible con la mayoría de las herramientas
+    "module": "ESNext", // Alineado con Node.js y compatible con la mayoría de las herramientas
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "moduleResolution": "node", // 'NodeNext' es experimental, 'node' es más estable
+    "moduleResolution": "Node", // 'NodeNext' es experimental, 'node' es más estable
     "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "lib": ["ESNext"],
     "allowJs": true,
     "checkJs": false, // Cambiado a false para permitir JavaScript sin verificación de tipos
     //"declaration": false, // Genera archivos .d.ts para proyectos de biblioteca
