@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Address" ALTER COLUMN "address_line_1" DROP DEFAULT,
+ALTER COLUMN "first_name" DROP DEFAULT,
+ALTER COLUMN "last_name" DROP DEFAULT,
+ALTER COLUMN "phone" DROP DEFAULT;

@@ -12,7 +12,7 @@ datasource db {
 model ShoppingCart {
   idShoppingCart String    @id @default(uuid()) @db.Uuid
   userId         String    @unique @db.Uuid
-  quantity       Int       @default(1)
+  quantity       Int       
   totalPrice     Decimal   @db.Decimal(10, 2)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
@@ -73,6 +73,23 @@ model User {
   ratings        Ratings[]
   shoppingCarts  ShoppingCart[]
   paymentMethods paymentMethods[]
+  CheckoutSession CheckoutSession?
+}
+
+
+
+model CheckoutSession {
+  id                String     @id @default(uuid()) @db.Uuid @unique
+  userId            String     @db.Uuid @unique
+  cart              Json       // Puede contener los ID de los productos y cantidades
+  information       Json       // Información del usuario, como dirección de envío
+  shippingMethod    String    // Método de envío seleccionado
+  shippingCost      Decimal    @db.Decimal(9, 2)
+  totalAmount       Decimal    @db.Decimal(10, 2) // Monto total del pedido
+  paymentDetails    Json?      // Detalles de pago, como referencia a un método de pago almacenado
+  currentStep       String     // "Cart", "Information", "Shipping", "Payment"
+  updatedAt         DateTime   @updatedAt
+  user              User       @relation(fields: [userId], references: [id])
 }
 
 model paymentMethods {
@@ -96,22 +113,27 @@ model paymentMethods {
 model Address {
   idAddress    String   @id @unique @default(uuid()) @db.Uuid
   userId       String   @db.Uuid
-  street       String
-  city         String
-  zipcode      Int
   country      String
+  first_name   String
+  last_name    String
+  city         String
+  address_line_1 String
+  address_line_2 String?
+  street       String?
+  state        String?
+  zipcode      String
+  phone        String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   user         User     @relation("UserAddresses", fields: [userId], references: [id])
   Order        Order[]
-  maxAddresses Int?
 }
 
 model Order {
   idOrder          String   @id @unique @default(uuid()) @db.Uuid
   userId           String   @db.Uuid
   orderNumber      String   @unique
-  addressId String   @db.Uuid
+  addressId        String   @db.Uuid
   shippingAddress  Address  @relation(fields: [addressId], references: [idAddress])
   paymentMethod    String
   createdAt        DateTime    @default(now())
