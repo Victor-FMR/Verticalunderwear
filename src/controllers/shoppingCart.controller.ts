@@ -1,5 +1,18 @@
 import { Request, Response } from "express";
-import {addShoppingcart, dismShoppingcart,} from "../services/shoppingCart.service.js";
+import {addShoppingcart, checkShoppingCart, dismShoppingcart,} from "../services/shoppingCart.service.js";
+
+
+
+export const checkShoppingCartCtrl = async (req: Request, res: Response) => {
+  try {
+    const result = await checkShoppingCart(req, res);
+      
+    res.json({result})
+    
+  } catch (error) {}
+};
+
+
 
 export const addCartCtrl = async (req: Request, res: Response) => {
   try {

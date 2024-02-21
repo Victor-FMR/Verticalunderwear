@@ -1,10 +1,21 @@
 import { Request, Response } from "express";
-import axios from "axios";
+import axios from "axios"
+import countries from 'i18n-iso-countries';
 import { PAYPAL_API, PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET } from "../config.js";
 import { PrismaClient } from "@prisma/client";
-import { User } from "../interfaces/user.interface.js";
-export const getPaypalToken = async ( res: Response) => {
+const Prisma = new PrismaClient();
+import { ShippingAddress, User } from "../interfaces/user.interface.js";
+
+
+
+
+
+export const getPaypalToken = async () => {
+
+
   try {
+
+
     const params = new URLSearchParams();
     params.append("grant_type", "client_credentials");
 
@@ -20,29 +31,69 @@ export const getPaypalToken = async ( res: Response) => {
     
     );
     //aqui esat el error
-    return access_token//res.status(200).json(access_token);
+    return access_token  //res.status(200).json(access_token);
   } catch (error) {
     console.error('Error al obtener el token de acceso:', error);
-    res.status(500).json({ message: "Error al obtener el token de acceso" });
+    throw new Error("Error Al obetener token de Paypal")
   }
 };
-const Prisma = new PrismaClient();
 
 
 
 export const createpaypalOrder = async(req: Request,res: Response) => {
-  const userId = (req.user as User)
+
+  const userId = (req.user as User).id
+
   try {
-    //const selectAddress =await  Prisma.address.findFirst({where: {userId:userId.id }})
+     // Obtener el token de acceso de PayPal
+    const access_token = await getPaypalToken();
 
-   const shop =await  Prisma.shoppingCart.findUnique({where: {userId:userId.id }})
 
+     // Recuperar la sesión de checkout para obtener el total a pagar
+     const checkoutSession = await Prisma.checkoutSession.findUnique({
+      where: { userId: userId}
+    });
 
-  
-    // Obtener el token de acceso de PayPal
-    const access_token = await getPaypalToken(res);
+    if (!checkoutSession) {
+        return res.status(404).json({ message: 'Sesión de checkout no encontrada.' });
+    }
+
+  const shop =await  Prisma.shoppingCart.findUnique({where: {userId:userId }})
+
+  if(!shop){
+    return res.status(404).json({ message: 'Carrito de compras no encontrado.' });
+  }
+    
+   
+   const cartItems = await Prisma.cartItem.findMany({
+    where: { shoppingCart: { userId: userId } },include:{product:true}
+  });
+
     
     
+    
+    
+         // Preparar los artículos para PayPal
+         const items = cartItems.map(item => ({
+          name: item.product.productName,
+          unit_amount: {
+              currency_code: "USD",
+              value: item.priceAtAdd.toString(),
+          },
+          quantity: item.quantity.toString(),
+      }));
+       
+        
+    
+
+     
+
+
+      const countryName = (checkoutSession.information as ShippingAddress).country || "";
+   
+      //const countryCodeEN = countries.getAlpha2Code('United States', 'en'); // Inglés
+      const countryCodeES = countries.getAlpha2Code(countryName, 'es'); // Español
+
 
     const order = {
       intent: "CAPTURE",
@@ -51,17 +102,40 @@ export const createpaypalOrder = async(req: Request,res: Response) => {
           reference_id: PAYPAL_CLIENT_ID, // The reference ID for the transaction in your system.
           amount: {
             currency_code: "USD",
-            value: shop!.totalPrice  // The amount of the transaction in the currency specified above.
+            value: checkoutSession.totalAmount, // The amount of the transaction in the currency specified above.
+            breakdown:{
+              
+              item_total: {
+                currency_code: "USD",
+                value: shop.totalPrice, // Total de los artículos como cadena
+            },
+              shipping: { // Costo de envío
+                currency_code: "USD",
+                value: checkoutSession.shippingCost
+              },
+             
+            }  ,// Show the breakdown of tax and shipping charges
+            
+            
           },
-          // shipping:{
-          //   address:{
-          //     address_line_1: selectAddress.street,
-          //     admin_area_1: selectAddress.city,
-          //     postal_code: selectAddress.zipcode,
-          //     country_code: selectAddress.country      
-
-          //   }
-          // }
+          items: items,
+          shipping:{
+           name:{
+            full_name: `${(checkoutSession.information as ShippingAddress).first_name } ${(checkoutSession.information as ShippingAddress).last_name}`|| "",
+             
+            
+           },
+            
+           address: {
+            address_line_1: (checkoutSession.information as ShippingAddress).address_line_1,
+            address_line_2: (checkoutSession.information as ShippingAddress).address_line_2 || "",
+            admin_area_1: (checkoutSession.information as ShippingAddress).state, // El estado o región
+            admin_area_2:  (checkoutSession.information as ShippingAddress).city, // La ciudad
+            postal_code: (checkoutSession.information as ShippingAddress).zipcode,  // El código postal
+            country_code: countryCodeES || "", // El código de país ISO de 2 letras
+          }
+          },
+         
         },
       ],
       payment_source: {
@@ -71,10 +145,10 @@ export const createpaypalOrder = async(req: Request,res: Response) => {
             brand_name: "Verticalunderwear",
             "locale": "en-US",
             landing_page: "LOGIN",
-            //"shipping_preference": address,
+            shipping_preference: "SET_PROVIDED_ADDRESS", // Indica a PayPal que use la dirección proporcionada
             user_action: "PAY_NOW",
             "return_url": "http://localhost:8003/v2/checkout/orders/capture",
-            //"cancel_url": "https://example.com/cancelUrl"
+            "cancel_url": "https://example.com/cancelUrl"
           },
         },
       },
@@ -88,10 +162,16 @@ export const createpaypalOrder = async(req: Request,res: Response) => {
       },
     });
 
-  
-    return res.status(202).json({ message: "Order created successfully",data});
+    // const detailsOrder= {
+    //   id: data.id,
+    //   status: data.status,
+      
+    // }
+
+
+    return data
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return res.status(503).send("Error creating PayPal order");
   }
   

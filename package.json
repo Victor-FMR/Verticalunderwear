@@ -1,6 +1,6 @@
 {
   "name": "back-end",
-  "version": "2.0.0",
+  "version": "20.11.1",
   "description": "Backend, para un Ecommerce de Ropa de Mujeres",
   "main": "index.js",
   "type": "module",
@@ -30,6 +30,7 @@
     "express-rate-limit": "^7.1.5",
     "express-session": "^1.17.3",
     "helmet": "^7.1.0",
+    "i18n-iso-countries": "^7.10.0",
     "jsonwebtoken": "^9.0.2",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.7.0",

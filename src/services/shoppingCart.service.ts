@@ -5,10 +5,27 @@ import {  User } from "../interfaces/user.interface.js";
 const Prisma = new PrismaClient();
 
 
+export  const checkShoppingCart = async (req:Request, res:Response) =>{
+  const userId = (req.user as User).id
+  try {
+      const carrito =  await Prisma.shoppingCart.findUnique({where:{userId: userId,},include:{cartItems:true}})
+
+      if(carrito?.cartItems.length === 0) {
+        return res.status(200).json({message: "Tu carrito esta Vacio ",isEmpty: true})
+      }
+
+
+    return res.status(200).json({carrito, isEmpty: false})
+  } catch (error) {
+    console.error("Error al verificar el carrito:", error);
+    return res.status(500).json({message: "Error al ver carrito"})
+  }
+}
+
 
 //NOTE - agregar producto al carrito de compras
 export const addShoppingcart = async (req: Request, res: Response,) => {
-  const { productId, quantity } = req.body;
+  const { productId} = req.body;
   const userId = (req.user as User).id 
 
 
@@ -52,7 +69,7 @@ export const addShoppingcart = async (req: Request, res: Response,) => {
               idCartItem: itemExistente.idCartItem,
             },
             data: {
-              quantity: itemExistente.quantity + Number(quantity),
+              quantity:{increment: 1}
             },
           });
         } else {
@@ -61,7 +78,7 @@ export const addShoppingcart = async (req: Request, res: Response,) => {
             data: {
               shoppingCartId: carrito.idShoppingCart,
               productId: productId,
-              quantity: Number(quantity),
+              quantity: 1,
               priceAtAdd: producto.price,
             },
           });
@@ -69,15 +86,11 @@ export const addShoppingcart = async (req: Request, res: Response,) => {
     
         // Actualizar la cantidad y el precio total del carrito
         await Prisma.shoppingCart.update({
-          where: {
-            idShoppingCart: carrito.idShoppingCart,
-          },
+          where: {idShoppingCart: carrito.idShoppingCart},
           data: {
-            quantity: {
-              increment:Number (quantity),
-            },
+            quantity: { increment: 1 },
             totalPrice: {
-              increment: Number(producto.price) * quantity,
+              increment: producto.price
             },
           },
         });

@@ -1,12 +1,12 @@
 import { Request, Response } from "express"
 import {  capturePaymentOrder, createpaypalOrder,  getPaypalToken } from "../services/paypalPayment.service.js"
 
-export const postPaypalTokenCtrl= async ( res: Response) => {
+export const postPaypalTokenCtrl= async (_req: Request, res: Response) => {
     try {
-         const result =await  getPaypalToken(res)
-        res.json(result)
+         const result =await  getPaypalToken()
+        return res.status(201).json(result)
     } catch (error) {
-        
+     return res.status(503).json({ message: "Error al obtener token de paypal" });
     }
   
 }

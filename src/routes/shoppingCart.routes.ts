@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { addCartCtrl, dismiCartCtrl,} from "../controllers/shoppingCart.controller.js";
+import { addCartCtrl, checkShoppingCartCtrl, dismiCartCtrl,} from "../controllers/shoppingCart.controller.js";
 import { checkAuthorization } from "../middlewares/request.middleware.js";
 
 
 const server = Router();
 
-server.get("/ver-carrito", checkAuthorization);
+server.get("/ver-carrito", checkAuthorization,checkShoppingCartCtrl);
 
 server.post("/cart-addProduct",checkAuthorization,addCartCtrl);
 

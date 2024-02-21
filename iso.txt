@@ -1,0 +1,16 @@
+const countries = require('i18n-iso-countries');
+
+// Registrar idiomas que necesitas
+countries.registerLocale(require("i18n-iso-countries/langs/en.json")); // Inglés
+countries.registerLocale(require("i18n-iso-countries/langs/es.json")); // Español
+countries.registerLocale(require("i18n-iso-countries/langs/fr.json")); // Francés
+// Añade más según sea necesario
+
+// Ejemplo de uso
+const countryCodeEN = countries.getAlpha2Code('United States', 'en'); // Inglés
+const countryCodeES = countries.getAlpha2Code('Estados Unidos', 'es'); // Español
+const countryCodeFR = countries.getAlpha2Code('États-Unis', 'fr'); // Francés
+
+console.log(countryCodeEN); // 'US'
+console.log(countryCodeES); // 'US'
+console.log(countryCodeFR); // 'US'
