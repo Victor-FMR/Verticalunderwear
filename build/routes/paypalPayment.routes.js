@@ -5,7 +5,7 @@ const server = Router();
 server.post('/v1/oauth2/token', checkAuthorization, postPaypalTokenCtrl);
 server.get(`/v2/checkout/orders`, checkAuthorization, postPaypalOrderCtrl);
 //server.get('/v2/checkout/orders/details',detailsPaypalOrderCtrl)
-server.get(`/v2/checkout/orders/capture`, checkAuthorization, capturePaymentOrderCtrl);
+server.get(`/v2/checkout/orders/capture`, capturePaymentOrderCtrl);
 server.get(`/v2/checkout/orders/{id}/confirm-payment-source`);
 //server.post(`/v2/checkout/orders/capture`,capturePaymentOrderCtrl)
 // server.get('/')
