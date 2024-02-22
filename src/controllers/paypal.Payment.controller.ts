@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import {  capturePaymentOrder, createpaypalOrder,  getPaypalToken } from "../services/paypalPayment.service.js"
-//import { User } from "../interfaces/user.interface.js"
+import { User } from "../interfaces/user.interface.js"
 
 export const postPaypalTokenCtrl= async (_req: Request, res: Response) => {
     try {
@@ -15,8 +15,8 @@ export const postPaypalTokenCtrl= async (_req: Request, res: Response) => {
 
 export const postPaypalOrderCtrl= async (req: Request, res: Response) => {
     try {
-        //const userId= (req.user as User).id
-        const result = await createpaypalOrder(req)
+        const userId= (req.user as User).id
+        const result = await createpaypalOrder(userId)
         res.json(result)
     } catch (error) {
         

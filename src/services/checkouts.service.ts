@@ -136,9 +136,9 @@ export const checkoutsShipping = async(req: Request, res: Response)=>{
 
 
 
-export const checkoutsPayment = async(req:Request)=>{
-    const userId= (req.user as User).id
-    const {paymentMethod}=req.body
+export const checkoutsPayment = async(userId:string,paymentMethod: string)=>{
+    // const userId= (req.user as User).id
+    // const {paymentMethod}=req.body
     try {
         const checkoutsSession = await Prisma.checkoutSession.findUnique({where: {userId: userId}})
 
@@ -148,7 +148,7 @@ export const checkoutsPayment = async(req:Request)=>{
 
 
           if(paymentMethod==='Paypal'){
-            const paypal = await createpaypalOrder(req)
+            const paypal = await createpaypalOrder(userId)
             
            
             if(paypal){

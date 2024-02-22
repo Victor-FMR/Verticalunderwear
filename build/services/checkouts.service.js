@@ -101,16 +101,16 @@ export const checkoutsShipping = async (req, res) => {
         return res.status(500).json({ message: "Error al actualizar la información de envío." });
     }
 };
-export const checkoutsPayment = async (req) => {
-    const userId = req.user.id;
-    const { paymentMethod } = req.body;
+export const checkoutsPayment = async (userId, paymentMethod) => {
+    // const userId= (req.user as User).id
+    // const {paymentMethod}=req.body
     try {
         const checkoutsSession = await Prisma.checkoutSession.findUnique({ where: { userId: userId } });
         if (!checkoutsSession) {
             throw new Error("Sesión de checkout no encontrada.");
         }
         if (paymentMethod === 'Paypal') {
-            const paypal = await createpaypalOrder(req);
+            const paypal = await createpaypalOrder(userId);
             if (paypal) {
                 await Prisma.checkoutSession.update({ where: { userId: userId },
                     data: { paymentDetails: paypal, currentStep: 'Payment' } });

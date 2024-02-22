@@ -1,5 +1,4 @@
 import { checkoutsInformation, checkoutsPayment, checkoutsShipping } from "../services/checkouts.service.js";
-//import { User } from "../interfaces/user.interface.js";
 export const checkoutsInformationCtrl = async (req, res) => {
     try {
         const result = await checkoutsInformation(req, res);
@@ -18,9 +17,9 @@ export const checkoutsShippingCtrl = async (req, res) => {
 };
 export const checkoutsPaymentCtrl = async (req, res) => {
     try {
-        //const userId = (req.user as User).id;
-        //const {paymentMethod}=req.body
-        const result = await checkoutsPayment(req);
+        const userId = req.user.id;
+        const { paymentMethod } = req.body;
+        const result = await checkoutsPayment(userId, paymentMethod);
         res.status(202).json(result);
     }
     catch (error) {

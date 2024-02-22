@@ -1,5 +1,4 @@
 import { capturePaymentOrder, createpaypalOrder, getPaypalToken } from "../services/paypalPayment.service.js";
-//import { User } from "../interfaces/user.interface.js"
 export const postPaypalTokenCtrl = async (_req, res) => {
     try {
         const result = await getPaypalToken();
@@ -11,8 +10,8 @@ export const postPaypalTokenCtrl = async (_req, res) => {
 };
 export const postPaypalOrderCtrl = async (req, res) => {
     try {
-        //const userId= (req.user as User).id
-        const result = await createpaypalOrder(req);
+        const userId = req.user.id;
+        const result = await createpaypalOrder(userId);
         res.json(result);
     }
     catch (error) {

@@ -1,6 +1,6 @@
 import {  Request, Response, } from "express";
 import { checkoutsInformation, checkoutsPayment, checkoutsShipping } from "../services/checkouts.service.js";
-//import { User } from "../interfaces/user.interface.js";
+import { User } from "../interfaces/user.interface.js";
 
 export const checkoutsInformationCtrl =async(req: Request ,res: Response)=>{
 
@@ -29,10 +29,10 @@ export const checkoutsShippingCtrl =async(req: Request ,res: Response)=>{
 export const checkoutsPaymentCtrl =async(req: Request ,res: Response)=>{
 
     try {
-        //const userId = (req.user as User).id;
-        //const {paymentMethod}=req.body
+        const userId = (req.user as User).id;
+        const {paymentMethod}=req.body
 
-        const result =  await checkoutsPayment(req)
+        const result =  await checkoutsPayment(userId, paymentMethod)
         res.status(202).json(result)
     } catch (error:any) {
         switch (error.message) {
