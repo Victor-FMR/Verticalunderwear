@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 const Prisma = new PrismaClient();
 export const createdAddress = async (req, res) => {
     const userId = req.user;
-    const { country, street, city, zipcode, first_name, last_name, address_line_1, phone } = req.body;
+    const { country, street, state, city, zipcode, first_name, last_name, address_line_1, phone } = req.body;
     try {
         const maxAddress = 5;
         const compareAdress = await Prisma.address.count({ where: { userId: userId.id } });
@@ -13,6 +13,7 @@ export const createdAddress = async (req, res) => {
             data: {
                 city: city,
                 country: country,
+                state: state,
                 first_name: first_name,
                 last_name: last_name,
                 address_line_1: address_line_1,
@@ -43,6 +44,7 @@ export const getAddress = async (req, res) => {
                 first_name: true,
                 last_name: true,
                 phone: true,
+                state: true,
                 country: true,
                 city: true,
                 zipcode: true,
@@ -62,7 +64,7 @@ export const getAddress = async (req, res) => {
     }
 };
 export const putAddress = async (req, res) => {
-    const { country, street, city, zipcode, address_line_1, phone, first_name, last_name } = req.body;
+    const { country, street, state, city, zipcode, address_line_1, phone, first_name, last_name } = req.body;
     const addressId = req.params.id;
     const userId = req.user;
     try {
@@ -75,6 +77,7 @@ export const putAddress = async (req, res) => {
         const updateAddress = await Prisma.address.update({
             where: { idAddress: addressId },
             data: {
+                state: state,
                 city: city,
                 address_line_1: address_line_1,
                 first_name: first_name,

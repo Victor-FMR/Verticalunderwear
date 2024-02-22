@@ -136,52 +136,43 @@ export const checkoutsShipping = async(req: Request, res: Response)=>{
 
 
 
-export const checkoutsPayment = async(req: Request, res: Response)=>{
-     const {paymentMethod}= req.body
-
-
-     
-    const userId = (req.user as User).id;
+export const checkoutsPayment = async(req:Request)=>{
+    const userId= (req.user as User).id
+    const {paymentMethod}=req.body
     try {
         const checkoutsSession = await Prisma.checkoutSession.findUnique({where: {userId: userId}})
 
           if(!checkoutsSession){
-            return res.status(404).json({message:"Sesión de checkout no encontrada."})
+            throw new Error( "Sesión de checkout no encontrada.");
           }
 
 
           if(paymentMethod==='Paypal'){
-            const paypal = await createpaypalOrder(req,res)
+            const paypal = await createpaypalOrder(req)
             
            
             if(paypal){
 
-
               await  Prisma.checkoutSession.update({where: {userId: userId},
-                    data: {
-                       paymentDetails:paypal ,
-                        currentStep: 'Payment'
-                    }})
+                    data: {paymentDetails:paypal , currentStep: 'Payment'}})
 
-              return res.status(202).json(paypal)
+              return paypal
 
-            }else{
-                return res.status(500).json({message:'Error al crear la orden de pago con PayPal'});
-             }
+            }
          
 
          }else {
             // Si tienes otros métodos de pago, manejarlos aquí
             // ...
             // Asegúrate de retornar una respuesta para cada método de pago
-            return res.status(400).json({ message: 'Método de pago no soportado' });
+            throw new Error("Método de pago no soportado");
         }
           
 
         
     } catch (error) {
         console.error(error)
-        return res.status(500).json({message: "Error al Realizar El Pago"})
+       throw  error 
         
     }
 }
