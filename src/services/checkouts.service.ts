@@ -1,5 +1,7 @@
+import { Request, Response } from "express"; 
+import {parsePhoneNumberFromString} from 'libphonenumber-js'
+import countries from 'i18n-iso-countries';
 import { PrismaClient} from "@prisma/client";
-import { Request, Response } from "express";
 import { User } from "../interfaces/user.interface.js";
 import { createpaypalOrder } from "./paypalPayment.service.js";
 
@@ -10,21 +12,38 @@ const Prisma = new PrismaClient();
 export const checkoutsInformation = async(req: Request, res: Response)=>{
     const userId = (req.user as User).id
     const { first_name, last_name, address_line_1, address_line_2, state,city, zipcode, country, phone,street } = req.body;
+     
+   
+   
+    //const countryCodeEN = countries.getAlpha2Code('United States', 'en'); // Inglés
+    const countryCodeES = countries.getAlpha2Code(country, 'es'); // Español
+   
+     if(!countryCodeES){
+        res.status(404).json({Message: `El país proporcionado (${country}) no es válido o no se pudo encontrar su código ISO.`});
+    } 
+     
+    const phoneNumber = parsePhoneNumberFromString(phone, countryCodeES as any );
+        // if (phoneNumber) {
+        //   // El número es válido
+        //    console.log(phoneNumber.formatInternational());
+        // //return true;
+        // }
+    
+  // Construye el objeto shippingAddress con la información proporcionada
+  const shippingAddress = {
+    first_name: first_name,
+    last_name: last_name,
+    address_line_1: address_line_1,
+    address_line_2: address_line_2,
+    city: city,
+    state: state,
+    street: street,
+    zipcode: zipcode,
+    country: country,
+    phone: phoneNumber?.formatInternational()
+};
 
-
-      // Construye el objeto shippingAddress con la información proporcionada
-      const shippingAddress = {
-        first_name: first_name,
-        last_name: last_name,
-        address_line_1: address_line_1,
-        address_line_2: address_line_2,
-        city: city,
-        state: state,
-        street: street,
-        zipcode: zipcode,
-        country: country,
-        phone: phone
-    };
+     
 
     try {
     let checkoutSession= await Prisma.checkoutSession.findUnique({where: {userId: userId}})
@@ -37,7 +56,10 @@ export const checkoutsInformation = async(req: Request, res: Response)=>{
     //const shippingAddress = await Prisma.address.findMany({where:{userId:userId}})
         
     const cart= await Prisma.cartItem.findMany({where:{shoppingCart:{userId: userId}}})
-
+        
+   
+        
+       
         // Si no existe una sesión de checkout, crea una nueva
         if (!checkoutSession) {
              checkoutSession = await Prisma.checkoutSession.create({
@@ -155,9 +177,11 @@ export const checkoutsPayment = async(userId:string,paymentMethod: string)=>{
 
               await  Prisma.checkoutSession.update({where: {userId: userId},
                     data: {paymentDetails:paypal , currentStep: 'Payment'}})
-
-              return paypal
-
+              const {id, status, payment,links}= paypal
+              
+              
+              return {id,status,payment,links}//paypal["links"][0]["href"],
+             
             }
          
 
@@ -166,9 +190,10 @@ export const checkoutsPayment = async(userId:string,paymentMethod: string)=>{
             // ...
             // Asegúrate de retornar una respuesta para cada método de pago
             throw new Error("Método de pago no soportado");
+            
         }
           
-
+        return null
         
     } catch (error) {
         console.error(error)
